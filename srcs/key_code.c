@@ -6,7 +6,7 @@
 /*   By: abourgeu <abourgeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 21:42:55 by abourgeu          #+#    #+#             */
-/*   Updated: 2017/03/24 13:42:49 by abourgeu         ###   ########.fr       */
+/*   Updated: 2017/04/20 17:54:39 by abourgeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,43 +14,39 @@
 
 int		event(int key, t_env *e)
 {
-	t_player *pl;
-
-	pl = (t_player*)malloc(sizeof(t_player));
-	e->pl->moveSpeed = 5.0;
-	ROTSPEED = 3.0;
+	printf("%d\n", key);
 	if (key == 53)
 		exit(write(1, "Program close.\n", 15));
-	if (key == 123)
+	if (key == 123 || key == 0)
 	{
-		e->pl->oldDirX = e->dirX;
+		OLDDX = e->dirX;
 		e->dirX = e->dirX * cos(ROTSPEED) - e->dirY * sin(ROTSPEED);
-		e->dirY = e->pl->oldDirX * sin(ROTSPEED) + e->dirY * cos(ROTSPEED);
+		e->dirY = OLDDX * sin(ROTSPEED) + e->dirY * cos(ROTSPEED);
 		e->pl->oldPlaneX = e->planeX;
 		e->planeX = e->planeX * cos(ROTSPEED) - e->planeY * sin(ROTSPEED);
 		e->planeY = e->pl->oldPlaneX * sin(ROTSPEED) + e->planeY * cos(ROTSPEED);
 	}
-	if (key == 124)
+	if (key == 124 || key == 2)
 	{
-		e->pl->oldDirX = e->dirX;
+		OLDDX = e->dirX;
 		e->dirX = e->dirX * cos(-ROTSPEED) - e->dirY * sin(-ROTSPEED);
-		e->dirY = e->pl->oldDirX * sin(-ROTSPEED) + e->dirY * cos(-ROTSPEED);
+		e->dirY = OLDDX * sin(-ROTSPEED) + e->dirY * cos(-ROTSPEED);
 		e->pl->oldPlaneX = e->planeX;
 		e->planeX = e->planeX * cos(-ROTSPEED) - e->planeY * sin(-ROTSPEED);
 		e->planeY = e->pl->oldPlaneX * sin(-ROTSPEED) + e->planeY * cos(-ROTSPEED);
 	}
-	if (key == 125)
+	if (key == 125 || key == 1)
 	{
-		if(!(e->worldMap[(int)(e->posX - e->dirX * e->pl->moveSpeed)][(int)(e->posY)]))
+		if((e->tab[(int)(e->posX - e->dirX * e->pl->moveSpeed)][(int)(e->posY)]) != '1')
 			e->posX -= e->dirX * e->pl->moveSpeed;
-		if(!(e->worldMap[(int)(e->posX)][(int)(e->posY - e->dirY * e->pl->moveSpeed)]))
+		if((e->tab[(int)(e->posX)][(int)(e->posY - e->dirY * e->pl->moveSpeed)]) != '1')
 			e->posY -= e->dirY * e->pl->moveSpeed;
 	}
-	if (key == 126)
+	if (key == 126 || key == 13)
 	{
-		if(!(e->worldMap[(int)(e->posX + e->dirX * e->pl->moveSpeed)][(int)(e->posY)]))
+		if((e->tab[(int)(e->posX + e->dirX * e->pl->moveSpeed)][(int)(e->posY)]) != '1')
 			e->posX += e->dirX * e->pl->moveSpeed;
-		if(!(e->worldMap[(int)(e->posX)][(int)(e->posY + e->dirY * e->pl->moveSpeed)]))
+		if((e->tab[(int)(e->posX)][(int)(e->posY + e->dirY * e->pl->moveSpeed)]) != '1')
 			e->posY += e->dirY * e->pl->moveSpeed;
 	}
 	e->redraw = 1;

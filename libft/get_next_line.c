@@ -6,11 +6,10 @@
 /*   By: abourgeu <abourgeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 12:49:02 by abourgeu          #+#    #+#             */
-/*   Updated: 2017/03/22 20:15:54 by abourgeu         ###   ########.fr       */
+/*   Updated: 2017/04/06 11:26:59 by abourgeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./get_next_line.h"
 #include "libft.h"
 
 static	char	*get_line(char **save, int i)

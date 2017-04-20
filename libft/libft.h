@@ -6,7 +6,7 @@
 /*   By: abourgeu <abourgeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 11:26:29 by abourgeu          #+#    #+#             */
-/*   Updated: 2017/01/31 15:01:10 by abourgeu         ###   ########.fr       */
+/*   Updated: 2017/04/06 11:27:16 by abourgeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,11 @@
 # include <unistd.h>
 # include <string.h>
 # include <stdlib.h>
+# include <fcntl.h>
+# define BUFF_SIZE 100
 
+int					get_next_line(const int fd, char **line);
+char				*ft_read_map(char *av);
 int					get_next_line(const int fd, char **line);
 char				*ft_imtoa_base(uintmax_t value, uintmax_t base);
 char				*ft_ltoa(long n);

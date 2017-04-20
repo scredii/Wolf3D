@@ -6,7 +6,7 @@
 /*   By: abourgeu <abourgeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 20:12:35 by abourgeu          #+#    #+#             */
-/*   Updated: 2017/03/24 15:04:41 by abourgeu         ###   ########.fr       */
+/*   Updated: 2017/04/20 17:30:05 by abourgeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int			ft_loop(t_env *e)
 {
 	if (e->redraw)
 	{
-		// ft_draw(e);
+		ft_draw(e);
 		e->redraw = 0;
 	}
 	return (0);
@@ -33,24 +33,56 @@ int			ft_expose(t_env *e)
 void		ft_coffee(t_env *e)
 {
 	MLX = mlx_init();
-	WIN = mlx_new_window(MLX, 512, 384, "=> Wolf3D <=");
-	mlx_key_hook(WIN, event, e);
+	WIN = mlx_new_window(MLX, WIDTH, HEIGHT, "=> Wolf3D <=");
+	mlx_hook(WIN, KeyPress, KeyPressMask, event, e);
 	// mlx_mouse_hook(WIN, ft_mouse_hook, e);
-	// mlx_hook(WIN, 6, (1L << 8), ft_mouse, e);
+	// mlx_hook(WIN, 1, ButtonPress, event, e);
 	mlx_loop_hook(MLX, ft_loop, e);
 	mlx_expose_hook(WIN, ft_expose, e);
 	mlx_loop(MLX);
 }
 
+void		ft_init_map(t_env *e)
+{
+	char	*tmp;
+	int		i;
+
+	i = -1;
+	tmp = ft_read_map("map1");
+	e->tab = ft_strsplit(tmp, '\n');
+	e->Xmax = ft_strlen(e->tab[0]);
+	while(e->tab[++i])
+		if ((size_t)e->Xmax != ft_strlen(e->tab[i]))
+			exit(write(1, "Error\n", 6));
+	e->Ymax = i;
+	free(tmp);
+}
+
 void		ft_init_env(t_env *e)
 {
-	e->posX = 2;
-	e->posY = 2;
-	e->dirX = -1;
-	e->dirY = 0;
-	e->planeX = 0;
-	e->planeY = 0.66;
-	// ft_init_position(e);
+	e->posX = 12.50;
+	e->posY = 15.50;
+	e->pl->moveSpeed = 0.10;
+	e->pl->rotSpeed = 0.10;
+	e->dirX = -1.0;
+	e->dirY = 0.0;
+	e->planeX = 0.0;
+	e->planeY = 0.70;
+	e->redraw = 1;
+	e->pl->distMurX = 0.0;
+	e->pl->distMurY = 0.0;
+	e->pl->dist2MurX = 0.0;
+	e->pl->dist2MurY = 0.0;
+	e->pl->longueurMur = 0.0;
+	e->pl->oldPlaneX = 0.0;
+	e->pl->oldDirX = 0.0;
+	e->pl->perpWallDist = 0.0;
+	e->pl->cameraX = 0.0;
+	e->pl->rayPosX = 0.0;
+	e->pl->rayPosY = 0.0;
+	e->pl->rayDirX = 0.0;
+	e->pl->rayDirY = 0.0;
+	ft_init_map(e);
 }
 
 int			main(void)
@@ -59,8 +91,9 @@ int			main(void)
 
 	if (!(e = (t_env*)malloc(sizeof(t_env))))
 		exit(write(1, "Malloc failed\n", 15));
-	ft_init_map(e);
-	// ft_init_player();
+	if (!(e->pl  = (t_player*)malloc(sizeof(t_player))))
+		exit(write(1, "Malloc failed\n", 15));
+	ft_init_env(e);
 	ft_coffee(e);
 	return (0);
 }

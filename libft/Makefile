@@ -6,7 +6,7 @@
 #    By: abourgeu <abourgeu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/07 11:11:16 by abourgeu          #+#    #+#              #
-#    Updated: 2017/01/22 15:31:27 by abourgeu         ###   ########.fr        #
+#    Updated: 2017/04/06 11:07:39 by abourgeu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ SRC = ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii.c	 	\
 	  ft_swap.c ft_sqrt.c ft_is_negative.c ft_listlast.c ft_list_find.c	\
 	  ft_strndup.c ft_strdupfree.c ft_subfree.c ft_strjoinfree.c		\
 	  ft_putnstr.c ft_itoa_base.c ft_ltoa_base.c ft_lltoa_base.c		\
-	  ft_lltoa.c ft_ltoa.c ft_imtoa_base.c get_next_line.c\
+	  ft_lltoa.c ft_ltoa.c ft_imtoa_base.c get_next_line.c ft_read_map.c \
 
 OBJ = $(SRC:.c=.o)
 
