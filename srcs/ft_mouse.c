@@ -6,12 +6,33 @@
 /*   By: abourgeu <abourgeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 21:44:44 by abourgeu          #+#    #+#             */
-/*   Updated: 2017/04/20 13:01:56 by abourgeu         ###   ########.fr       */
+/*   Updated: 2017/04/23 13:46:31 by abourgeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
-//
+
+// int				ft_mouse_hook(t_env *e)
+// {
+// 	SDL_Event	event;
+//  	while(SDL_PollEvent(&event))
+// 	{
+// 		if (event.type == SDL_MOUSEMOTION)
+// 		{
+// 			SDL_PixelFormat* fmt;
+// 			if (event.motion.xrel < 0)
+// 				SDL_FillRect(MLX, NULL, SDL_MapRGB(fmt, 255, 0, 0));
+// 			else if (event.motion.xrel > 0)
+// 				SDL_FillRect(MLX, NULL, SDL_MapRGB(fmt, 0, 255, 0));
+// 			else if (event.motion.yrel < 0)
+// 				SDL_FillRect(MLX, NULL, SDL_MapRGB(fmt, 0, 0, 255));
+// 			else if (event.motion.yrel > 0)
+// 				SDL_FillRect(MLX, NULL, SDL_MapRGB(fmt, 0, 255, 255));
+// 		}
+// 	}
+// 	return (0);
+// }
+
 // double		ft_calc_shift(double mouse, double length, t_env *e)
 // {
 // 	double	shift;

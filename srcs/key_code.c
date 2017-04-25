@@ -6,7 +6,7 @@
 /*   By: abourgeu <abourgeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 21:42:55 by abourgeu          #+#    #+#             */
-/*   Updated: 2017/04/20 17:54:39 by abourgeu         ###   ########.fr       */
+/*   Updated: 2017/04/25 15:12:22 by abourgeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int		event(int key, t_env *e)
 {
-	printf("%d\n", key);
+	if (key == 17)
+		e->which = (e->which ? 0 : 1);
 	if (key == 53)
 		exit(write(1, "Program close.\n", 15));
 	if (key == 123 || key == 0)

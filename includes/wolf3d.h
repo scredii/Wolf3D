@@ -6,7 +6,7 @@
 /*   By: abourgeu <abourgeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 20:14:15 by abourgeu          #+#    #+#             */
-/*   Updated: 2017/04/20 17:39:41 by abourgeu         ###   ########.fr       */
+/*   Updated: 2017/04/25 15:12:00 by abourgeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@
 # include "../minilibx/mlx.h"
 # define WIDTH 1600
 # define HEIGHT 1200
+# define TEXTW 64
+# define TEXTH 64
+# define SIDE e->pl->side
 # define DIRY e->pl->rayDirY
 # define DIRX e->pl->rayDirX
 # define OLDDX e->pl->oldDirX
@@ -34,9 +37,19 @@
 # define ENDIAN e->endian
 # define DATA e->data
 
-
 typedef struct		s_player
 {
+	char			**text_data;
+	double			*buff;
+	int				tex_width;
+	int				tex_height;
+	int				texX;
+	double 			wallX;
+	int				textNum;
+	void			*texture[3];
+	int				xorcolor;
+	int				ycolor;
+	int				xycolor;
 	double			oldPlaneX;
 	double			oldDirX;
 	double			perpWallDist;
@@ -59,6 +72,7 @@ typedef struct		s_player
 
 typedef struct		s_env
 {
+	int				which;
 	double			shiftx;
 	double			shifty;
 	double			mousex;
@@ -95,11 +109,16 @@ typedef struct		s_env
 	t_player		*pl;
 }					t_env;
 
+int					pixel_text(t_env *e);
+void				ft_init_text(t_env *e);
+int					ft_mouse_hook(t_env *e);
+void				ft_wallX_value(t_env *e);
+void 				ft_init_cam(t_env *e, int x);
+int					texture(t_env *e);
 void				ft_draw(t_env *e);
-void				ft_calc_height(t_env *e);
-void				ft_init_position(t_env *e);
-int					ft_mouse_hook(int button, int x, int y, t_env *e);
-void				ft_calc_dist(t_env *e);
+void				ft_wall_length(t_env *e);
+void				ft_map(t_env *e);
+void				ft_get_dist(t_env *e);
 void				ft_init_map(t_env *e);
 void				pixel(int x, t_env *e);
 int					event(int key, t_env *e);

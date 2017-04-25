@@ -6,7 +6,7 @@
 /*   By: abourgeu <abourgeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 20:12:35 by abourgeu          #+#    #+#             */
-/*   Updated: 2017/04/20 17:30:05 by abourgeu         ###   ########.fr       */
+/*   Updated: 2017/04/25 15:13:30 by abourgeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,13 @@ void		ft_init_map(t_env *e)
 		if ((size_t)e->Xmax != ft_strlen(e->tab[i]))
 			exit(write(1, "Error\n", 6));
 	e->Ymax = i;
+	// e->pl->textNum = e->tab[e->pl->mapX][e->pl->mapY] - 1;
 	free(tmp);
 }
 
 void		ft_init_env(t_env *e)
 {
+	// e->pl->buff = (double*)malloc(WIDTH * sizeof(double));
 	e->posX = 12.50;
 	e->posY = 15.50;
 	e->pl->moveSpeed = 0.10;
@@ -67,8 +69,9 @@ void		ft_init_env(t_env *e)
 	e->dirX = -1.0;
 	e->dirY = 0.0;
 	e->planeX = 0.0;
-	e->planeY = 0.70;
+	e->planeY = 0.65;
 	e->redraw = 1;
+	e->which = 0;
 	e->pl->distMurX = 0.0;
 	e->pl->distMurY = 0.0;
 	e->pl->dist2MurX = 0.0;
