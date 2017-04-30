@@ -6,7 +6,7 @@
 /*   By: abourgeu <abourgeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/24 15:14:06 by abourgeu          #+#    #+#             */
-/*   Updated: 2017/04/25 15:31:42 by abourgeu         ###   ########.fr       */
+/*   Updated: 2017/04/27 18:26:57 by abourgeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,32 +39,33 @@ void		pixel(int x, t_env *e)
 	int		y;
 
 	y = -1;
-	e->roof = 0x009999D6;
-	e->floor = 0xFF5B805B;
 	while (++y < HEIGHT)
 	{
 		pos = (x * (e->bpp / 8)) + (y * e->size);
-		if (e->which == 0)
+		if (y < e->drawEnd && y > e->drawStart)
+		{
 			e->wall = ft_color(e);
-		// else
-		// 	e->wall = pixel_text(e);
-		if (y < e->drawEnd  &&  y > e->drawStart )
-		{
 			DATA[pos] = e->wall;
-			DATA[pos + 1] = e->wall >> 6;
-			DATA[pos + 2] = e->wall >> 12;
-		}
-		else if (y > e->drawEnd)
-		{
-			DATA[pos] = e->floor;
-			DATA[pos + 1] = e->floor;
-			DATA[pos + 2] = e->floor;
+			DATA[pos + 1] = e->wall >> 8;
+			DATA[pos + 2] = e->wall >> 16;
 		}
 		else
-		{
-			DATA[pos] = e->roof;
-			DATA[pos + 1] = e->roof >> 6;
-			DATA[pos + 2] = e->roof >> 12;
-		}
+			pixel_2(e, y, pos);
+	}
+}
+
+void		pixel_2(t_env *e, int y, int pos)
+{
+	if (y >= e->drawEnd)
+	{
+		DATA[pos] = e->floor;
+		DATA[pos + 1] = e->floor >> 8;
+		DATA[pos + 2] = e->floor >> 16;
+	}
+	else
+	{
+		DATA[pos] = e->roof;
+		DATA[pos + 1] = e->roof >> 8;
+		DATA[pos + 2] = e->roof >> 16;
 	}
 }

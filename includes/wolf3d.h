@@ -6,7 +6,7 @@
 /*   By: abourgeu <abourgeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 20:14:15 by abourgeu          #+#    #+#             */
-/*   Updated: 2017/04/25 15:12:00 by abourgeu         ###   ########.fr       */
+/*   Updated: 2017/04/27 18:25:24 by abourgeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,9 @@
 # include "../minilibx/mlx.h"
 # define WIDTH 1600
 # define HEIGHT 1200
-# define TEXTW 64
-# define TEXTH 64
+# define MSPEED e->pl->moveSpeed
+# define INITY e->pos_init_Y
+# define INITX e->pos_init_X
 # define SIDE e->pl->side
 # define DIRY e->pl->rayDirY
 # define DIRX e->pl->rayDirX
@@ -39,17 +40,6 @@
 
 typedef struct		s_player
 {
-	char			**text_data;
-	double			*buff;
-	int				tex_width;
-	int				tex_height;
-	int				texX;
-	double 			wallX;
-	int				textNum;
-	void			*texture[3];
-	int				xorcolor;
-	int				ycolor;
-	int				xycolor;
 	double			oldPlaneX;
 	double			oldDirX;
 	double			perpWallDist;
@@ -60,24 +50,23 @@ typedef struct		s_player
 	double			rayPosY;
  	double			rayDirX;
 	double			rayDirY;
+	double			DistWallX;
+	double			DistWallY;
+	double			Dist2WallX;
+	double			Dist2WallY;
 	int				mapX;
 	int				mapY;
 	int				side;
-	double			distMurX;
-	double			distMurY;
-	double			dist2MurX;
-	double			dist2MurY;
-	double			longueurMur;
 }					t_player;
 
 typedef struct		s_env
 {
-	int				which;
-	double			shiftx;
-	double			shifty;
-	double			mousex;
-	double			mousey;
-	double			zoom;
+	double			pos_init_X;
+	double			pos_init_Y;
+	double			planeX;
+	double			planeY;
+	double			view_x;
+	double			view_y;
 	int				lineheight;
 	int				drawStart;
 	int				drawEnd;
@@ -85,39 +74,32 @@ typedef struct		s_env
 	int				Ymax;
 	int				stepX;
 	int				stepY;
-	double			posX;
-	double			posY;
-	double			planeX;
-	double			planeY;
-	double			dirX;
-	double			dirY;
-	int				height;
-	int				width;
-	int				sizeline;
-	void			*mlx;
 	int				wall;
 	int				floor;
 	int				roof;
-	void			*img;
-	void			*win;
 	int				bpp;
 	int				endian;
 	int				size;
 	int				redraw;
 	char			*data;
 	char			**tab;
+	void			*img;
+	void			*win;
+	void			*mlx;
 	t_player		*pl;
 }					t_env;
 
-int					pixel_text(t_env *e);
-void				ft_init_text(t_env *e);
-int					ft_mouse_hook(t_env *e);
-void				ft_wallX_value(t_env *e);
-void 				ft_init_cam(t_env *e, int x);
-int					texture(t_env *e);
+void				pixel_2(t_env *e, int y, int pos);
+void				event_left(t_env *e);
+void				event_right(t_env *e);
+void				event_down(t_env *e);
+void				event_up(t_env *e);
+void				ft_coffee(t_env *e);
+void				ft_init_cam(t_env *e, int x);
+void				ft_maj_pos(t_env *e);
 void				ft_draw(t_env *e);
 void				ft_wall_length(t_env *e);
-void				ft_map(t_env *e);
+void				ft_ray(t_env *e);
 void				ft_get_dist(t_env *e);
 void				ft_init_map(t_env *e);
 void				pixel(int x, t_env *e);
