@@ -6,7 +6,7 @@
 #    By: abourgeu <abourgeu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/24 11:37:19 by abourgeu          #+#    #+#              #
-#    Updated: 2017/04/27 16:52:31 by abourgeu         ###   ########.fr        #
+#    Updated: 2017/04/30 16:32:50 by abourgeu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = wolf3d
 CFLAGS = -Wall -Wextra -Werror
 
 SRC = 	srcs/main.c srcs/key_code.c srcs/ft_init.c srcs/ft_draw.c \
-		srcs/ft_mouse.c srcs/mlx.c\
+		srcs/mlx.c srcs/get_dist.c\
 
 OBJ = $(SRC:.c=.o)
 

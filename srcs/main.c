@@ -6,7 +6,7 @@
 /*   By: abourgeu <abourgeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 20:12:35 by abourgeu          #+#    #+#             */
-/*   Updated: 2017/04/30 15:14:03 by abourgeu         ###   ########.fr       */
+/*   Updated: 2017/04/30 17:00:21 by abourgeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,27 @@
 
 void		ft_verif_wall(t_env *e)
 {
-	int 	i;
+	int		i;
 
 	i = -1;
-	while(e->tab[0][++i])
+	// if (!e->s_bool)
+	// 	exit(write(1, "Need 1 pos with 's'. \n", 22));
+	ft_error(e);
+	while (e->tab[0][++i])
 		if (e->tab[0][i] != '1')
 			exit(write(1, "Map error.\n", 11));
 	i = -1;
-	printf("y:%d\n", e->Ymax);
-	printf("x:%d\n", e->Xmax);
-	printf("%d\n", e->tab[i + 1][e->Ymax - 1]);
-	// printf("1:%c\n", e->tab[i + 1][5]);
-	while(e->tab[++i][e->Ymax])
-	{
-		printf("%c\n", e->tab[i][e->Ymax]);
-		if (e->tab[i][e->Ymax] != '1')
+	while (e->tab[e->Ymax - 1][++i])
+		if (e->tab[e->Ymax - 1][i] != '1')
 			exit(write(1, "Map error.\n", 11));
-	}
+	i = -1;
+	while (e->tab[++i][0] && i < e->Ymax - 1)
+		if (e->tab[i][0] != '1')
+			exit(write(1, "Map error.\n", 11));
+	i = -1;
+	while (e->tab[++i][e->Xmax - 1] && i < e->Ymax - 1)
+		if (e->tab[i][e->Xmax - 1] != '1')
+			exit(write(1, "Map error.\n", 11));
 }
 
 void		verif_map(t_env *e)
@@ -39,8 +43,7 @@ void		verif_map(t_env *e)
 	int j;
 
 	i = 0;
-	j = 0;
-	while(i < e->Ymax)
+	while (i < e->Ymax)
 	{
 		j = 0;
 		while (j < e->Xmax)
@@ -50,6 +53,7 @@ void		verif_map(t_env *e)
 				exit(write(1, "Map error.\n", 11));
 			if (e->tab[i][j] == 's')
 			{
+				e->s_bool = 1;
 				e->pos_init_X = i + 0.50;
 				e->pos_init_Y = j + 0.50;
 			}
@@ -66,10 +70,10 @@ void		ft_init_map(t_env *e)
 	int		i;
 
 	i = -1;
-	tmp = ft_read_map("map1");
+	tmp = ft_read_map("map2");
 	e->tab = ft_strsplit(tmp, '\n');
 	e->Xmax = ft_strlen(e->tab[0]);
-	while(e->tab[++i])
+	while (e->tab[++i])
 		if ((size_t)e->Xmax != ft_strlen(e->tab[i]))
 			exit(write(1, "Error\n", 6));
 	e->Ymax = i;
@@ -79,6 +83,7 @@ void		ft_init_map(t_env *e)
 
 void		ft_init_env(t_env *e)
 {
+	e->s_bool = 0;
 	e->pos_init_X = 14.50;
 	e->pos_init_Y = 15.50;
 	e->pl->moveSpeed = 0.10;
@@ -110,7 +115,7 @@ int			main(void)
 
 	if (!(e = (t_env*)malloc(sizeof(t_env))))
 		exit(write(1, "Malloc failed\n", 15));
-	if (!(e->pl  = (t_player*)malloc(sizeof(t_player))))
+	if (!(e->pl = (t_player*)malloc(sizeof(t_player))))
 		exit(write(1, "Malloc failed\n", 15));
 	ft_init_env(e);
 	ft_coffee(e);

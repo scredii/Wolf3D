@@ -6,7 +6,7 @@
 /*   By: abourgeu <abourgeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 20:14:15 by abourgeu          #+#    #+#             */
-/*   Updated: 2017/04/27 18:25:24 by abourgeu         ###   ########.fr       */
+/*   Updated: 2017/04/30 17:01:55 by abourgeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@
 # include "../minilibx/mlx.h"
 # define WIDTH 1600
 # define HEIGHT 1200
+# define PPWDIST e->pl->perpWallDist
+# define DISTWX e->pl->DistWallX
+# define DISTWY e->pl->DistWallY
 # define MSPEED e->pl->moveSpeed
 # define INITY e->pos_init_Y
 # define INITX e->pos_init_X
@@ -48,7 +51,7 @@ typedef struct		s_player
 	double			cameraX;
 	double			rayPosX;
 	double			rayPosY;
- 	double			rayDirX;
+	double			rayDirX;
 	double			rayDirY;
 	double			DistWallX;
 	double			DistWallY;
@@ -61,6 +64,7 @@ typedef struct		s_player
 
 typedef struct		s_env
 {
+	int				s_bool;
 	double			pos_init_X;
 	double			pos_init_Y;
 	double			planeX;
@@ -89,6 +93,9 @@ typedef struct		s_env
 	t_player		*pl;
 }					t_env;
 
+void				ft_error(t_env *e);
+void				get_diry(t_env *e);
+void				get_dirx(t_env *e);
 void				pixel_2(t_env *e, int y, int pos);
 void				event_left(t_env *e);
 void				event_right(t_env *e);

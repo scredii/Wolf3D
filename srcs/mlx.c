@@ -6,7 +6,7 @@
 /*   By: abourgeu <abourgeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/27 16:50:19 by abourgeu          #+#    #+#             */
-/*   Updated: 2017/04/27 16:52:10 by abourgeu         ###   ########.fr       */
+/*   Updated: 2017/04/30 17:06:33 by abourgeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,12 @@ void		ft_draw(t_env *e)
 	ft_ray(e);
 	mlx_put_image_to_window(MLX, WIN, IMG, 0, 0);
 	mlx_destroy_image(MLX, IMG);
+}
+
+void		ft_error(t_env *e)
+{
+	if (!e->s_bool)
+		exit(write(1, "Need 1 pos with 's'. \n", 22));
+	if (e->Ymax > 100 || e->Xmax > 100)
+		exit(write(1, "Map limit: 100*100\n", 19));
 }
