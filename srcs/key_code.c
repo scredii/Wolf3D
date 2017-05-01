@@ -6,7 +6,7 @@
 /*   By: abourgeu <abourgeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 21:42:55 by abourgeu          #+#    #+#             */
-/*   Updated: 2017/04/30 17:12:22 by abourgeu         ###   ########.fr       */
+/*   Updated: 2017/05/01 14:45:54 by abourgeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		event(int key, t_env *e)
 			e->pl->moveSpeed += 0.2;
 	if (key == 78)
 		if (e->pl->moveSpeed > 0.10)
-			e->pl->moveSpeed -= 0.2;
+			e->pl->moveSpeed -= 0.1;
 	if (key == 53)
 		exit(write(1, "Program close.\n", 15));
 	if (key == 123 || key == 0)

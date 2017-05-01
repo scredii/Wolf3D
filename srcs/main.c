@@ -6,7 +6,7 @@
 /*   By: abourgeu <abourgeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 20:12:35 by abourgeu          #+#    #+#             */
-/*   Updated: 2017/04/30 17:00:21 by abourgeu         ###   ########.fr       */
+/*   Updated: 2017/05/01 15:02:42 by abourgeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ void		ft_verif_wall(t_env *e)
 	int		i;
 
 	i = -1;
-	// if (!e->s_bool)
-	// 	exit(write(1, "Need 1 pos with 's'. \n", 22));
 	ft_error(e);
 	while (e->tab[0][++i])
 		if (e->tab[0][i] != '1')
@@ -70,12 +68,12 @@ void		ft_init_map(t_env *e)
 	int		i;
 
 	i = -1;
-	tmp = ft_read_map("map2");
+	tmp = ft_read_map("map/map");
 	e->tab = ft_strsplit(tmp, '\n');
 	e->Xmax = ft_strlen(e->tab[0]);
 	while (e->tab[++i])
 		if ((size_t)e->Xmax != ft_strlen(e->tab[i]))
-			exit(write(1, "Error\n", 6));
+			exit(write(1, "Size map error\n", 15));
 	e->Ymax = i;
 	verif_map(e);
 	free(tmp);
@@ -86,12 +84,12 @@ void		ft_init_env(t_env *e)
 	e->s_bool = 0;
 	e->pos_init_X = 14.50;
 	e->pos_init_Y = 15.50;
-	e->pl->moveSpeed = 0.10;
-	e->pl->rotSpeed = 0.10;
+	e->pl->moveSpeed = 0.12;
+	e->pl->rotSpeed = 0.07;
 	e->view_x = -1.0;
 	e->view_y = 0.0;
 	e->planeX = 0.0;
-	e->planeY = 0.65;
+	e->planeY = 0.66;
 	e->redraw = 1;
 	e->pl->DistWallX = 0.0;
 	e->pl->DistWallY = 0.0;
@@ -100,7 +98,6 @@ void		ft_init_env(t_env *e)
 	e->roof = 0x009999;
 	e->floor = 0xCCCCFF;
 	e->pl->oldDirX = 0.0;
-	e->pl->perpWallDist = 0.0;
 	e->pl->cameraX = 5.0;
 	e->pl->rayPosX = 0.0;
 	e->pl->rayPosY = 0.0;

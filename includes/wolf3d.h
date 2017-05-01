@@ -6,7 +6,7 @@
 /*   By: abourgeu <abourgeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 20:14:15 by abourgeu          #+#    #+#             */
-/*   Updated: 2017/04/30 17:01:55 by abourgeu         ###   ########.fr       */
+/*   Updated: 2017/05/01 14:54:08 by abourgeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ typedef struct		s_env
 	t_player		*pl;
 }					t_env;
 
+int					close_prog(t_env *e);
 void				ft_error(t_env *e);
 void				get_diry(t_env *e);
 void				get_dirx(t_env *e);

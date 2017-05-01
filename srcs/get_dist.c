@@ -6,7 +6,7 @@
 /*   By: abourgeu <abourgeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/30 16:18:36 by abourgeu          #+#    #+#             */
-/*   Updated: 2017/04/30 16:28:02 by abourgeu         ###   ########.fr       */
+/*   Updated: 2017/05/01 15:01:42 by abourgeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,11 @@ void		get_diry(t_env *e)
 		e->stepY = 1;
 		DISTWY = (e->pl->mapY + 1 - e->pl->rayPosY) * e->pl->Dist2WallY;
 	}
+}
+
+int			close_prog(t_env *e)
+{
+	mlx_destroy_image(MLX, WIN);
+	exit(write(1, "Program close.\n", 15));
+	return (0);
 }

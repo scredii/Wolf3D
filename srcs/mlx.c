@@ -6,7 +6,7 @@
 /*   By: abourgeu <abourgeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/27 16:50:19 by abourgeu          #+#    #+#             */
-/*   Updated: 2017/04/30 17:06:33 by abourgeu         ###   ########.fr       */
+/*   Updated: 2017/05/01 14:52:52 by abourgeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@ int			ft_loop(t_env *e)
 	if (e->redraw)
 	{
 		ft_draw(e);
+		mlx_string_put(MLX, WIN, 60, 40, 0x00ff38, "Help:");
+		mlx_string_put(MLX, WIN, 60, 60, 0x00ff38, "Arrows or WSAD for motion");
+		mlx_string_put(MLX, WIN, 60, 80, 0x00ff38, "+ or - for MoveSpeed");
+		mlx_string_put(MLX, WIN, 60, 100, 0x00ff38, "Esc for exit");
 		e->redraw = 0;
 	}
 	return (0);
@@ -35,6 +39,8 @@ void		ft_coffee(t_env *e)
 	MLX = mlx_init();
 	WIN = mlx_new_window(MLX, WIDTH, HEIGHT, "Wolf3D");
 	mlx_hook(WIN, KeyPress, KeyPressMask, event, e);
+	mlx_hook(WIN, KeyPress, KeyPressMask, event, e);
+	mlx_hook(WIN, 17, (1L << 17), close_prog, e);
 	mlx_loop_hook(MLX, ft_loop, e);
 	mlx_expose_hook(WIN, ft_expose, e);
 	mlx_loop(MLX);
